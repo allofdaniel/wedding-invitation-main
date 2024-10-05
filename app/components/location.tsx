@@ -58,7 +58,7 @@ export default function Location() {
 
       <div className={info}>
         <b>자가용 이용시</b>
-        <span>네비게이션에 '대전광역시 서구 탄방동 700 (둔산중로 8)' 또는 '더케이컨벤션웨딩부페' 또는 '한국교직원공제회 대전회관'을 입력하고 오세요</span>
+        <span>네비게이션에  &apos;대전광역시 서구 탄방동 700 (둔산중로 8) &apos; 또는  &apos;더케이컨벤션웨딩부페 &apos; 또는  &apos;한국교직원공제회 대전회관 &apos;을 입력하고 오세요</span>
       </div>
 
       <div className={icon}>
@@ -81,8 +81,8 @@ function Map() {
             const mapContainer = document.getElementById("map");
             const mapOption = {
               center: new kakao.maps.LatLng(
-                36.3504119, // 대전광역시의 위도
-                127.3845475 // 대전광역시의 경도
+                36.2050, // 대전광역시의 위도
+                127.2314 // 대전광역시의 경도
               ),
               level: 5,
               draggable: false,
