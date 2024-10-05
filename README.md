@@ -1,6 +1,4 @@
-# 미량 범영 모바일 청첩장
-
-> [wedding.beomyeong.miryang.dev](https://wedding.beomyeong.miryang.dev)
+# 다니엘 제희 모바일 청첩장
 
 ```
 npm i
