@@ -59,7 +59,7 @@ export default function SplineLove() {
     <div className={container}>
       <div className={imageContainer}>
         <img
-          src="https://pub-0bbf49e88dd74965a39e23f7f2cb868e.r2.dev/KakaoTalk_Photo_2024-10-06-00-20-21%20001.png"
+          src="https://pub-0bbf49e88dd74965a39e23f7f2cb868e.r2.dev/KakaoTalk_Photo_2024-10-06-23-39-03%20002.png"
           alt="대체 이미지"
           style={{
             width: "100%",
