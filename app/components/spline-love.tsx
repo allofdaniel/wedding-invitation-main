@@ -7,6 +7,7 @@ import { container, loading, imageContainer, textContainer } from "./spline-love
 export default function SplineLove() {
   const [loaded, setLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState("");
 
   // 모바일 기기 감지
   useEffect(() => {
@@ -18,6 +19,36 @@ export default function SplineLove() {
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // D-day 및 시간 계산 함수
+  useEffect(() => {
+    const weddingDate = new Date("2025-05-03T13:00:00"); // 결혼식 날짜 및 시간
+
+    const updateRemainingTime = () => {
+      const now = new Date(); // 현재 시간
+      const diffInMs = weddingDate.getTime() - now.getTime();
+
+      if (diffInMs <= 0) {
+        setTimeRemaining("D-00:00:00:00"); // 이미 결혼식이 지난 경우
+        return;
+      }
+
+      const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+      const diffInHours = Math.floor((diffInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const diffInMinutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60));
+      const diffInSeconds = Math.floor((diffInMs % (1000 * 60)) / 1000);
+
+      // 남은 시간 포맷을 D-dd.hh:mm:ss 형태로 설정
+      const formattedTime = `D-${String(diffInDays).padStart(2, "0")}:${String(diffInHours).padStart(2, "0")}:${String(diffInMinutes).padStart(2, "0")}:${String(diffInSeconds).padStart(2, "0")}`;
+      setTimeRemaining(formattedTime);
+    };
+
+    // 1초마다 업데이트
+    const intervalId = setInterval(updateRemainingTime, 1000);
+
+    // 컴포넌트가 언마운트될 때 인터벌 정리
+    return () => clearInterval(intervalId);
   }, []);
 
   function onLoad() {
@@ -41,9 +72,25 @@ export default function SplineLove() {
         />
       </div>
 
-      <div className={textContainer} style={{ padding: "0 10px" }}> {/* padding을 통해 텍스트와 이미지 간 간격 조정 */}
-        <h1>김제희 & 김다니엘</h1>
+      <div className={textContainer} style={{ padding: "0 10px" }}>
+        <h1>
+          김제희 & 김다니엘 <br />
+          {timeRemaining} {/* D-day 시간 표시 */}
+        </h1>
         <p>1년의 연애를 마치고, 새로운 시작을 맞이하게 되었습니다...</p>
+      </div>
+
+      {/* YouTube 비디오 삽입 및 자동 재생 */}
+      <div style={{ display: "none" }}> {/* 화면에 표시되지 않도록 hidden 처리 */}
+        <iframe
+          width="0"
+          height="0"
+          src="https://www.youtube.com/embed/CnL56e3ElwI?autoplay=1&loop=1&playlist=CnL56e3ElwI"
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+          title="Wedding Song"
+        ></iframe>
       </div>
     </div>
   );
