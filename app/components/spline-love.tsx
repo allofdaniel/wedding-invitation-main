@@ -26,7 +26,6 @@ export default function SplineLove() {
 
   return (
     <div className={container}>
-      {!loaded && <span className={loading}>불러오는 중</span>}
       <div className={imageContainer}>
         <img
           src="https://pub-0bbf49e88dd74965a39e23f7f2cb868e.r2.dev/KakaoTalk_Photo_2024-10-06-00-20-21%20001.png"
