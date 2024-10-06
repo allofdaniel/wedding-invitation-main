@@ -27,3 +27,10 @@ export const imageContainer = style({
   maxWidth: "100%", // 컨테이너 너비를 넘지 않도록 제한
   objectFit: "cover", // 이미지 비율 유지
 });
+
+export const textContainer = style({
+  fontSize: "16px", // 적절한 폰트 크기 등 원하는 스타일을 적용
+  color: "#333",    // 텍스트 색상
+  margin: "10px 0", // 여백 설정
+});
+
