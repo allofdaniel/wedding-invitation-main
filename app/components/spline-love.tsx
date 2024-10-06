@@ -2,28 +2,27 @@
 
 import Spline from "@splinetool/react-spline";
 import { container, loading } from "./spline-love.css";
-import { Application } from "@splinetool/runtime";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function SplineLove() {
   const [loaded, setLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  function onLoad(spline: Application) {
-    if (spline) {
-      setLoaded(true);
-      console.log("Spline loaded");
+  useEffect(() => {
+    // 모바일 기기 감지
+    const checkMobile = () => {
+      const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
+      setIsMobile(isMobileDevice);
+    };
 
-      // 조명 설정을 추가하여 피겨가 검게 보이지 않도록 조정
-      const ambientLight = spline.findObjectByName("ambientLight");
-      if (ambientLight) {
-        ambientLight.intensity = 1.5; // 주변광 밝기를 높여줍니다
-      }
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
-      const directionalLight = spline.findObjectByName("directionalLight");
-      if (directionalLight) {
-        directionalLight.intensity = 1.5; // 방향성 조명 밝기 조정
-      }
-    }
+  function onLoad() {
+    setLoaded(true);
+    console.log("Spline loaded");
   }
 
   return (
